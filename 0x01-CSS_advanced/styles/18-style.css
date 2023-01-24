@@ -143,14 +143,14 @@ a:active {
 	font-family: var(--nav-item-font-family);
 	font-weight: var(--nav-item-font-weight);
 	font-size: var(--nav-item-font-size);
-	letter-spacing: var(--nav-item-letter-spacing);
+	letter-spacing: calc(.04 * rem);
 	display: var(--nav-item-display);
-	margin: var(--nav-item-margin);
+	margin: 0 0 calc(3 * rem) 0;
 }
 
 .nav .nav-link {
 	display: block;
-    padding: calc(0.5 * var(--root-font-size)) var(--root-font-size) calc(0.5 * var(--root-font-size)) var(--root-font-size);
+    padding: calc(0.5 * rem) var(--root-font-size) calc(0.5 * rem) var(--root-font-size);
 }
 
 .nav .nav-link:hover {
