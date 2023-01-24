@@ -34,7 +34,7 @@
 	--nav-item-font-size: var(--font-size-medium);
 	--nav-item-letter-spacing: 4%;
 	--nav-item-display: inline-block;
-	--nav-item-margin: 0 0 calc(3 * var(--root-font-size)) 0;
+	--nav-item-margin: 0 0 calc(3 * rem) 0;
 	--nav-item-link-hover: var(--color-primary);
 }
 
@@ -145,12 +145,12 @@ a:active {
 	font-size: var(--nav-item-font-size);
 	letter-spacing: var(--nav-item-letter-spacing);
 	display: var(--nav-item-display);
-	margin: calc(3 * var(--nav-item-margin));
+	margin: var(--nav-item-margin);
 }
 
 .nav .nav-link {
 	display: block;
-    padding: 0 0 calc(0.5 * var(--root-font-size)) 0;
+    padding: calc(0.5 * var(--root-font-size)) var(--root-font-size) calc(0.5 * var(--root-font-size)) var(--root-font-size);
 }
 
 .nav .nav-link:hover {
