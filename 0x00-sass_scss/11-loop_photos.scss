@@ -1,0 +1,7 @@
+@import 'list-names';
+
+@each $name in $list-names {
+  .#{$name} {
+    background-image: url("/img/#{$name}.jpg");
+  }
+}

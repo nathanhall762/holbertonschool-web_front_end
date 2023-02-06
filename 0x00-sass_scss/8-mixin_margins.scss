@@ -1,0 +1,14 @@
+@mixin set-margin($side, $value) {
+	margin-#{$side}: $value;
+  }
+  
+  body {
+	@include set-margin(left, 10px);
+	@include set-margin(right, 10px);
+  }
+  
+  div {
+	@include set-margin(left, 15px);
+	@include set-margin(right, 15px);
+  }
+  
