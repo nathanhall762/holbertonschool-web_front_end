@@ -8,16 +8,16 @@ let studentHogwarts = (function() {
 
 	return {
 		setName: function(newName) {
-		name = newName;
+			name = newName;
 		},
 		rewardStudent: function() {
-		changeScoreBy(1);
+			changeScoreBy(1);
 		},
 		penalizeStudent: function() {
-		changeScoreBy(-1);
+			changeScoreBy(-1);
 		},
 		getScore: function() {
-		return name + ": " + privateScore;
+			return name + ": " + privateScore;
 		}
 	};
 })();
