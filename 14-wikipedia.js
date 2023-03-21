@@ -22,3 +22,4 @@ function queryWikipedia(callback) {
 }
 
 queryWikipedia(createElement);
+document
