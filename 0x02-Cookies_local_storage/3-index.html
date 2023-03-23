@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div id="form">
+		<h2 id="loginHead">Login to the website</h2>
+		<input type="text" name="firstname" id="firstname" placeholder="Firstname">
+		<input type="text" name="email" id="email" placeholder="Email">
+		<button onclick="setCookies();">Log me in</button>
+	</div>
+	<script>
+		function setCookies() {
+			const firstname = document.getElementById('firstname').value;
+			const email = document.getElementById('email').value;
+			const expireDate = new Date();
+			expireDate.setDate(expireDate.getDate() + 10);
+			document.cookie = 'firstname=' + firstname + '; expires=' + expireDate.toUTCString();
+			document.cookie = 'email=' + email + '; expires=' + expireDate.toUTCString();
+		}
+
+		function showCookies() {
+			const cookies = document.cookie;
+			const p = document.createElement('p');
+			p.innerHTML = `Email: ${getCookie('email')}<br>Firstname: ${getCookie('firstname')}`;
+			document.body.appendChild(p);
+		}
+
+		function getCookie(name) {
+			const cookies = document.cookie.split(';');
+			for (let i = 0; i < cookies.length; i++) {
+				const cookie = cookies[i].trim();
+				if (cookie.startsWith(name + '=')) {
+					return cookie.substring(name.length + 1);
+				}
+			}
+			return '';
+		}
+
+		function showForm() {
+			if (document.getElementById('loginHead')) {
+				const loginHead = document.getElementById("loginHead");
+				loginHead.remove();
+			}
+			document.getElementById('form').style.display = 'block';
+		}
+
+		function hideForm() {
+			document.getElementById('form').style.display = 'none';
+		}
+
+		function deleteCookiesAndShowForm() {
+			let expires = new Date(Date.now());
+			document.cookie = `firstname= ;expires=${expires.toUTCString()}`;
+			document.cookie = `email= ;expires=${expires.toUTCString()}`;
+			showForm();
+		}
+
+		
+		function showWelcomeMessageOrForm() {
+			if (document.cookie) {
+				hideForm();
+				console.log("Welcome");
+				const heading = document.createElement("h1");
+				const headingText = document.createTextNode("Welcome FIRSTNAME (logout)");
+				heading.appendChild(headingText);
+				document.querySelector("body").appendChild(heading);
+			} else {
+				showForm();
+			}
+		}
+
+		window.addEventListener("load", (event) => {
+			showWelcomeMessageOrForm()
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+	<meta charset="utf-8" />
+	<title>Task 5</title>
+	<style>
+		td:last-child {
+			background-color: orange;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"
+		integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw=" crossorigin="anonymous"></script>
+	<script type="application/javascript">
+		function createFamilyTree() {
+			$('body').prepend('<table><thead><tr><th>Firstname</th><th>Lastname</th><th></th></tr></thead><tbody></tbody></table>');
+		}
+
+		function addNewMember(firstName, lastName, position) {
+			var row = '<tr><td>' + firstName + '</td><td>' + lastName + '</td><td>(x)</td></tr>';
+			if (position === 'before') {
+				$('tbody').prepend(row);
+			} else {
+				$('tbody').append(row);
+			}
+			$('tbody').on('click', 'td:last-child', function () {
+				$(this).parent().remove();
+			});
+		}
+
+		function createForm() {
+			var form = '<form><input type="text" placeholder="First name"><input type="text" placeholder="Last name"><select><option value="before">Before</option><option value="after">After</option></select><input type="submit" value="Add"></form>';
+			$('table').before(form);
+			$('form').submit(function (event) {
+				event.preventDefault();
+				var firstName = $('input:nth-of-type(1)').val();
+				var lastName = $('input:nth-of-type(2)').val();
+				var position = $('select').val();
+				addNewMember(firstName, lastName, position);
+			});
+		}
+
+		$(document).ready(function () {
+			createFamilyTree();
+			createForm();
+			addNewMember('Guillaume', 'Salva', 'after');
+			addNewMember('Arielle', 'Snizt', 'after');
+			addNewMember('Fanette', 'Snizt', 'after');
+			addNewMember('Gerard', 'Snizt', 'before');
+			addNewMember('Victor', 'Salva', 'before');
+		});
+	</script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
