@@ -30,13 +30,13 @@
 		}
 
 		function createForm() {
-			var form = '<form><input type="text" placeholder="First name"><input type="text" placeholder="Last name"><select><option value="before">Before</option><option value="after">After</option></select><input type="submit" value="Add"></form>';
+			let form = '<form><input type="text" placeholder="First name"><input type="text" placeholder="Last name"><select><option value="before">Before</option><option value="after">After</option></select><input type="submit" value="Add"></form>';
 			$('table').before(form);
 			$('form').submit(function (event) {
 				event.preventDefault();
-				var firstName = $('input:nth-of-type(1)').val();
-				var lastName = $('input:nth-of-type(2)').val();
-				var position = $('select').val();
+				let firstName = $('input:nth-of-type(1)').val();
+				let lastName = $('input:nth-of-type(2)').val();
+				let position = $('select').val();
 				addNewMember(firstName, lastName, position);
 			});
 		}

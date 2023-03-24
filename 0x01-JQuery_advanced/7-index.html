@@ -47,6 +47,7 @@
 				url: apiUrl,
 				dataType: 'jsonp',
 				success: (data) => {
+					console.log(data);
 					for (let i = 0; i < data.query.search.length; i++) {
 						addNewArticle(data.query.search[i].pageid, data.query.search[i].title, data
 							.query.search[i].snippet);

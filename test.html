@@ -2,62 +2,44 @@
 <html lang="en" dir="ltr">
 
 <head>
-
 	<meta charset="utf-8" />
-	<title>Task 8</title>
-	<style>
-		td:last-child {
-			background-color: orange;
-		}
-
-		.pages {
-			display: flex;
-			flex-direction: row;
-			padding: 1rem;
-		}
-
-		#pagination {
-			display: flex;
-			flex-direction: row;
-			list-style: none;
-			margin: 0;
-			padding: 0;
-		}
-
-		#pagination li {
-			cursor: pointer;
-			margin-left: 10px;
-			font-weight: bold;
-		}
-
-		#pagination li.current {
-			font-weight: normal;
-		}
-
-		.loading {
-			opacity: 0.2;
-		}
-	</style>
-	<script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"
-		integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw=" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<title>Task 0</title>
+	<!-- <script
+      src="https://code.jquery.com/jquery-3.6.4.slim.min.js"
+      integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw="
+      crossorigin="anonymous"
+    ></script> -->
+	<script src="https://code.jquery.com/jquery-3.6.4.js"
+		integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 	<script type="application/javascript">
-		function createSearchForm() {
+		// executes on DOM readiness
+		$(document).ready(() => {
+			createSearchForm();
+		});
+
+		// creates a form to search thru wikipedia
+		const createSearchForm = () => {
 			$('body').append([
 				$('<input/>', { type: 'text', id: 'search' }),
 				$('<input/>', {
-					type: 'submit', value: 'Submit', on: {
+					type: 'submit',
+					value: 'Submit',
+					on: {
 						click: () => {
+							// search for given string thru wikipedia
 							queryWikipedia($('#search').val());
 						},
 					},
 				}),
+				// create a list to hold the results of the query
 				$('<ul/>', { class: 'results' }),
+				// creates pages for the results
 				$('<ul/>', { class: 'pagination' }),
 			]);
 		};
 
-		function addNewArticle(id, title, snippet) {
+		// appends a list of results to the list
+		const addNewArticle = (id, title, snippet) => {
 			$('ul').append(
 				$('<li/>').append([
 					$('<p/>').append([
@@ -69,8 +51,8 @@
 			);
 		};
 
-		function queryWikipedia(search, offset = 0) {
-			displayLoading(true);
+		// searches wikipedia, creating a new article in the process
+		const queryWikipedia = (search, offset = 0) => {
 			$.ajax({
 				url: 'https://en.wikipedia.org/w/api.php?origin=*',
 				data: {
@@ -82,14 +64,16 @@
 				},
 				method: 'GET',
 				success: (json) => {
+					// executes on successful search
 					$('.results').replaceWith($('<ul/>', { class: 'results' }));
 					$.each(json.query.search, (index, result) => {
+						// send value of query to result-listing function
 						addNewArticle(result.pageid, result.title, result.snippet);
 					});
 					buildPagination(json.query.searchinfo.totalhits, 10, offset + 1);
-					displayLoading();
 				},
 				error: (xhr, status, errorThrown) => {
+					// executes if search fails
 					alert('Something went wrong!');
 					console.log(`Error: ${error}`);
 					console.log(`Status: ${status}`);
@@ -98,7 +82,8 @@
 			});
 		};
 
-		function buildPagination(numberOfItems, itemsPerPage, currentOffset) {
+		// style with pagination
+		const buildPagination = (numberOfItems, itemsPerPage, currentOffset) => {
 			$('.pagination').replaceWith($('<ul/>', { class: 'pagination' }));
 			for (let i = 0; i < numberOfItems / itemsPerPage; i++) {
 				let item = $('<li/>', {
@@ -121,24 +106,9 @@
 				$('.pagination').append(item);
 			}
 		};
-
-		$(document).ready(function () {
-			createSearchForm();
-		});
-
-		const displayLoading = (loading) => {
-			if (loading) {
-				$('.results').wrap('<div class="loading"></div>');
-			} else {
-				$('.results').unwrap();
-			}
-		};
 	</script>
-
 </head>
 
-<body>
-
-</body>
+<body></body>
 
 </html>
